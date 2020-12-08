@@ -1,6 +1,7 @@
 package com.java.yangnj;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 
 /**
  * @author ynj
@@ -86,7 +87,6 @@ public class CharTools {
     public static String charsToHexString(char[] charArray){
         StringBuffer sb = new StringBuffer(charArray.length);
         String sTemp;
-        System.out.println(charArray.length);
         for(int i = 0;i < charArray.length;i++){
             sTemp = Integer.toHexString(charArray[i]);
             switch(sTemp.length()){
@@ -106,5 +106,17 @@ public class CharTools {
         }
         return sb.toString();
     }
+
+    public static byte[] charsToBytes(char[] charArray){
+        byte[] byteArray = new byte[charArray.length*2];
+        ByteBuffer byteBuffer = ByteBuffer.allocate(charArray.length*2);
+        for(int i = 0;i < charArray.length;i++){
+            byteBuffer.putChar(charArray[i]);
+        }
+        byteBuffer.rewind();
+        byteBuffer.get(byteArray,0,2);
+        return byteArray;
+    }
+
 
 }
